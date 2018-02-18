@@ -1,0 +1,35 @@
+<html >
+<head>
+  <title>Bootstrap 3 Collapsible Sidebar</title>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+   <select  (change)="onSelect($event.target.value)"  name="countries" [(ngModel)]="selectedCountry" >
+
+           <option value={{country}} *ngFor="let country of countriesOptions" >{{country}}</option>
+   </select>
+
+    <div #size>{{countryQuantityMap.size}}</div>
+    <div *ngIf="countryQuantityMap.size">
+         <div>I am executing </div>
+
+        <app-barplot [quantityData]="countryQuantityMap">{{countryQuantityMap}}</app-barplot>
+        <app-piechart [quantityData]="countrySaleMap">{{countrySaleMap}}</app-piechart>
+        <app-multi-bar-horizantalchart  [quantityData]="countrySaleMap">{{countrySaleMap}}</app-multi-bar-horizantalchart>
+   </div>
+   <div *ngFor="let keys of countryStatesMap.keys()">
+           {{keys}}:
+          {{countryStatesMap.get(keys)}}
+   </div>
+   <div *ngIf="isCountrySelected">
+          <app-state-data [countrySelected]="selectedCountry" [countryMapdata]="countryStatesMap"></app-state-data>
+   </div>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
